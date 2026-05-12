@@ -13,8 +13,7 @@
 
 ******************************/
 
-$(document).ready(function()
-{
+$(document).ready(function () {
 	"use strict";
 
 	/* 
@@ -31,18 +30,16 @@ $(document).ready(function()
 
 	setHeader();
 
-	$(window).on('resize', function()
-	{
+	$(window).on('resize', function () {
 		setHeader();
 	});
 
-	$(document).on('scroll', function()
-	{
+	$(document).on('scroll', function () {
 		setHeader();
 	});
 
 	initMenu();
-	initGoogleMap();
+	initDestinationsCarousel();
 	initSearchForm();
 
 	/* 
@@ -51,32 +48,24 @@ $(document).ready(function()
 
 	*/
 
-	function setHeader()
-	{
-		if(window.innerWidth < 992)
-		{
-			if($(window).scrollTop() > 100)
-			{
+	function setHeader() {
+		if (window.innerWidth < 992) {
+			if ($(window).scrollTop() > 100) {
 				header.addClass('scrolled');
 			}
-			else
-			{
+			else {
 				header.removeClass('scrolled');
 			}
 		}
-		else
-		{
-			if($(window).scrollTop() > 100)
-			{
+		else {
+			if ($(window).scrollTop() > 100) {
 				header.addClass('scrolled');
 			}
-			else
-			{
+			else {
 				header.removeClass('scrolled');
 			}
 		}
-		if(window.innerWidth > 991 && menuActive)
-		{
+		if (window.innerWidth > 991 && menuActive) {
 			closeMenu();
 		}
 	}
@@ -87,92 +76,39 @@ $(document).ready(function()
 
 	*/
 
-	function initMenu()
-	{
-		if($('.hamburger').length && $('.menu').length)
-		{
+	function initMenu() {
+		if ($('.hamburger').length && $('.menu').length) {
 			var hamb = $('.hamburger');
 			var close = $('.menu_close_container');
 
-			hamb.on('click', function()
-			{
-				if(!menuActive)
-				{
+			hamb.on('click', function () {
+				if (!menuActive) {
 					openMenu();
 				}
-				else
-				{
+				else {
 					closeMenu();
 				}
 			});
 
-			close.on('click', function()
-			{
-				if(!menuActive)
-				{
+			close.on('click', function () {
+				if (!menuActive) {
 					openMenu();
 				}
-				else
-				{
+				else {
 					closeMenu();
 				}
 			});
 		}
 	}
 
-	function openMenu()
-	{
+	function openMenu() {
 		menu.addClass('active');
 		menuActive = true;
 	}
 
-	function closeMenu()
-	{
+	function closeMenu() {
 		menu.removeClass('active');
 		menuActive = false;
-	}
-
-	/* 
-
-	4. Init Google Map
-
-	*/
-
-	function initGoogleMap()
-	{
-		var myLatlng = new google.maps.LatLng(36.132229, -5.351153);
-    	var mapOptions = 
-    	{
-    		center: myLatlng,
-	       	zoom: 17,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			draggable: true,
-			scrollwheel: false,
-			zoomControl: true,
-			zoomControlOptions:
-			{
-				position: google.maps.ControlPosition.RIGHT_CENTER
-			},
-			mapTypeControl: false,
-			scaleControl: false,
-			streetViewControl: false,
-			rotateControl: false,
-			fullscreenControl: true,
-			styles:[]
-    	}
-
-    	// Initialize a map with options
-    	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-   
-		// Re-center map after window resize
-		google.maps.event.addDomListener(window, 'resize', function()
-		{
-			setTimeout(function()
-			{
-				google.maps.event.trigger(map, "resize");
-				map.setCenter(myLatlng);
-			}, 1400);
-		});
 	}
 
 	/* 
@@ -181,42 +117,52 @@ $(document).ready(function()
 
 	*/
 
-	function initSearchForm()
-	{
-		if($('.search_form').length)
-		{
+	function initSearchForm() {
+		if ($('.search_form').length) {
 			var searchForm = $('.search_form');
 			var searchInput = $('.search_content_input');
 			var searchButton = $('.content_search');
 
-			searchButton.on('click', function(event)
-			{
+			searchButton.on('click', function (event) {
 				event.stopPropagation();
 
-				if(!searchActive)
-				{
+				if (!searchActive) {
 					searchForm.addClass('active');
 					searchActive = true;
 
-					$(document).one('click', function closeForm(e)
-					{
-						if($(e.target).hasClass('search_content_input'))
-						{
+					$(document).one('click', function closeForm(e) {
+						if ($(e.target).hasClass('search_content_input')) {
 							$(document).one('click', closeForm);
 						}
-						else
-						{
+						else {
 							searchForm.removeClass('active');
 							searchActive = false;
 						}
 					});
 				}
-				else
-				{
+				else {
 					searchForm.removeClass('active');
 					searchActive = false;
 				}
-			});	
+			});
+		}
+	}
+
+
+	function initDestinationsCarousel() {
+		if ($('#destinations_slider').length) {
+			var carousel = $('#destinations_slider');
+			carousel.owlCarousel({
+				loop: true,
+				autoplay: true,
+				autoplayTimeout: 5000,
+				items: 1,
+				nav: true,
+				dots: true,
+				smartSpeed: 1200,
+				navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+				margin: 0
+			});
 		}
 	}
 });

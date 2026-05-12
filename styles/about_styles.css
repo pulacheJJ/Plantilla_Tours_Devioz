@@ -457,6 +457,9 @@ section
 }
 .logo a
 {
+	/* Agregamos Flexbox para asegurar que la imagen y el texto se centren */
+	display: flex;
+	align-items: center;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
 	color: #f4f4f8;
@@ -465,14 +468,10 @@ section
 }
 .logo a img
 {
-	display: inline-block;
-	vertical-align: baseline;
-	margin-right: 9px;
-	-webkit-transform: translateY(2px);
-	-moz-transform: translateY(2px);
-	-ms-transform: translateY(2px);
-	-o-transform: translateY(2px);
-	transform: translateY(2px);
+	/* Aquí controlamos el tamaño de tu logo.jpg */
+	height: 45px;
+	width: auto;
+	margin-right: 12px;
 }
 
 /*********************************
@@ -1371,4 +1370,39 @@ section
 .footer_nav_item a:hover
 {
 	color: #FFFFFF;
+}
+
+/*Estilos del Collage*/
+.peru_collage_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0;
+}
+
+.collage_main {
+    width: 55%;
+    margin-top: 30px; 
+}
+
+.collage_side {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.peru_collage_container img {
+    width: 100%;
+    height: auto;
+    border: 8px solid #ffffff;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+
+.peru_collage_container img:hover {
+    transform: scale(1.02);
+    z-index: 10;
 }

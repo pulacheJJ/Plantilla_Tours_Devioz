@@ -17,8 +17,7 @@
 
 ******************************/
 
-$(document).ready(function()
-{
+$(document).ready(function () {
 	"use strict";
 
 	/* 
@@ -35,13 +34,11 @@ $(document).ready(function()
 
 	setHeader();
 
-	$(window).on('resize', function()
-	{
+	$(window).on('resize', function () {
 		setHeader();
 	});
 
-	$(document).on('scroll', function()
-	{
+	$(document).on('scroll', function () {
 		setHeader();
 	});
 
@@ -59,32 +56,24 @@ $(document).ready(function()
 
 	*/
 
-	function setHeader()
-	{
-		if(window.innerWidth < 992)
-		{
-			if($(window).scrollTop() > 100)
-			{
+	function setHeader() {
+		if (window.innerWidth < 992) {
+			if ($(window).scrollTop() > 100) {
 				header.addClass('scrolled');
 			}
-			else
-			{
+			else {
 				header.removeClass('scrolled');
 			}
 		}
-		else
-		{
-			if($(window).scrollTop() > 100)
-			{
+		else {
+			if ($(window).scrollTop() > 100) {
 				header.addClass('scrolled');
 			}
-			else
-			{
+			else {
 				header.removeClass('scrolled');
 			}
 		}
-		if(window.innerWidth > 991 && menuActive)
-		{
+		if (window.innerWidth > 991 && menuActive) {
 			closeMenu();
 		}
 	}
@@ -95,65 +84,52 @@ $(document).ready(function()
 
 	*/
 
-	function initMenu()
-	{
-		if($('.hamburger').length && $('.menu').length)
-		{
+	function initMenu() {
+		if ($('.hamburger').length && $('.menu').length) {
 			var hamb = $('.hamburger');
 			var close = $('.menu_close_container');
 
-			hamb.on('click', function()
-			{
-				if(!menuActive)
-				{
+			hamb.on('click', function () {
+				if (!menuActive) {
 					openMenu();
 				}
-				else
-				{
+				else {
 					closeMenu();
 				}
 			});
 
-			close.on('click', function()
-			{
-				if(!menuActive)
-				{
+			close.on('click', function () {
+				if (!menuActive) {
 					openMenu();
 				}
-				else
-				{
+				else {
 					closeMenu();
 				}
 			});
 
-	
+
 		}
 	}
 
-	function openMenu()
-	{
+	function openMenu() {
 		menu.addClass('active');
 		menuActive = true;
 	}
 
-	function closeMenu()
-	{
+	function closeMenu() {
 		menu.removeClass('active');
 		menuActive = false;
 	}
 
-    /* 
+	/* 
 
 	4. Init Search
 
 	*/
 
-	function initSearch()
-	{
-		if($('.search_tab').length)
-		{
-			$('.search_tab').on('click', function()
-			{
+	function initSearch() {
+		if ($('.search_tab').length) {
+			$('.search_tab').on('click', function () {
 				$('.search_tab').removeClass('active');
 				$(this).addClass('active');
 				var clickedIndex = $('.search_tab').index(this);
@@ -171,30 +147,25 @@ $(document).ready(function()
 
 	*/
 
-	function initMoreOptions()
-	{
-		if($('.more_options').length)
-		{
+	function initMoreOptions() {
+		if ($('.more_options').length) {
 			var triggerEle = $('.more_options_trigger');
 			var ele = $('.more_options_list');
 
-			triggerEle.on('click', function(e)
-			{
+			triggerEle.on('click', function (e) {
 				e.preventDefault();
 				triggerEle.toggleClass('active');
 				ele.toggleClass('active');
 
 				var panel = ele;
 				var panelH = ele.prop('scrollHeight') + "px";
-				
-				if(panel.css('max-height') == "0px")
-				{
+
+				if (panel.css('max-height') == "0px") {
 					panel.css('max-height', panel.prop('scrollHeight') + "px");
 				}
-				else
-				{
+				else {
 					panel.css('max-height', "0px");
-				} 
+				}
 			});
 		}
 	}
@@ -205,47 +176,41 @@ $(document).ready(function()
 
 	*/
 
-	function initListingSlider()
-	{
-		if($('.hotel_slider').length)
-		{
+	function initListingSlider() {
+		if ($('.hotel_slider').length) {
 			var hotelSlider = $('.hotel_slider');
 
 			hotelSlider.owlCarousel(
-			{
-				loop:true,
-				nav:false,
-				dots:false,
-				margin:16,
-				responsive:
 				{
-					0:{items:2},
-					320:{items:3},
-					480:{items:4},
-					575:{items:5},
-					768:{items:7},
-					992:{items:8},
-					1199:{items:9}
-				}
-			});
+					loop: true,
+					nav: false,
+					dots: false,
+					margin: 16,
+					responsive:
+					{
+						0: { items: 2 },
+						320: { items: 3 },
+						480: { items: 4 },
+						575: { items: 5 },
+						768: { items: 7 },
+						992: { items: 8 },
+						1199: { items: 9 }
+					}
+				});
 
 			/* Custom nav events */
-			if($('.hotel_slider_prev').length)
-			{
+			if ($('.hotel_slider_prev').length) {
 				var prev = $('.hotel_slider_prev');
 
-				prev.on('click', function()
-				{
+				prev.on('click', function () {
 					hotelSlider.trigger('prev.owl.carousel');
 				});
 			}
 
-			if($('.hotel_slider_next').length)
-			{
+			if ($('.hotel_slider_next').length) {
 				var next = $('.hotel_slider_next');
 
-				next.on('click', function()
-				{
+				next.on('click', function () {
 					hotelSlider.trigger('next.owl.carousel');
 				});
 			}
@@ -258,30 +223,41 @@ $(document).ready(function()
 
 	*/
 
-	function initLightbox()
-	{
-		if($('.cboxElement').length)
-		{
-			$('.colorbox').colorbox(
-			{
-				rel:'colorbox'
+	function initLightbox() {
+		if ($('.colorbox').length) {
+			$('.colorbox').colorbox({
+				rel: 'colorbox',
+				transition: 'fade',
+				speed: 500,
+				// Quitamos width y height fijo para que el marco se ajuste a la foto
+				innerWidth: "auto",
+				innerHeight: "auto",
+				maxWidth: "95%",    // Límite para que no se salga de la pantalla
+				maxHeight: "95%",   // Límite para que no se salga de la pantalla
+				scalePhotos: true,  // Redimensiona la foto si es muy grande
+				opacity: 0.8,       // Fondo oscuro semi-transparente
+				previous: '<i class="fa fa-chevron-left" style="color:#333"></i>',
+				next: '<i class="fa fa-chevron-right" style="color:#333"></i>',
+				close: 'X',
+				onComplete: function () {
+					// Forzamos al visor a recalcular el tamaño exacto de la imagen cargada
+					$.colorbox.resize();
+				}
 			});
 		}
 	}
-
 	/* 
 
 	8. Init Google Map
 
 	*/
 
-	function initGoogleMap()
-	{
+	function initGoogleMap() {
 		var myLatlng = new google.maps.LatLng(36.132229, -5.351153);
-    	var mapOptions = 
-    	{
-    		center: myLatlng,
-	       	zoom: 17,
+		var mapOptions =
+		{
+			center: myLatlng,
+			zoom: 17,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			draggable: true,
 			scrollwheel: false,
@@ -295,17 +271,15 @@ $(document).ready(function()
 			streetViewControl: false,
 			rotateControl: false,
 			fullscreenControl: true,
-			styles:[]
-    	}
+			styles: []
+		}
 
-    	// Initialize a map with options
-    	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-   
+		// Initialize a map with options
+		map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
 		// Re-center map after window resize
-		google.maps.event.addDomListener(window, 'resize', function()
-		{
-			setTimeout(function()
-			{
+		google.maps.event.addDomListener(window, 'resize', function () {
+			setTimeout(function () {
 				google.maps.event.trigger(map, "resize");
 				map.setCenter(myLatlng);
 			}, 1400);
@@ -318,42 +292,34 @@ $(document).ready(function()
 
 	*/
 
-	function initSearchForm()
-	{
-		if($('.search_form').length)
-		{
+	function initSearchForm() {
+		if ($('.search_form').length) {
 			var searchForm = $('.search_form');
 			var searchInput = $('.search_content_input');
 			var searchButton = $('.content_search');
 
-			searchButton.on('click', function(event)
-			{
+			searchButton.on('click', function (event) {
 				event.stopPropagation();
 
-				if(!searchActive)
-				{
+				if (!searchActive) {
 					searchForm.addClass('active');
 					searchActive = true;
 
-					$(document).one('click', function closeForm(e)
-					{
-						if($(e.target).hasClass('search_content_input'))
-						{
+					$(document).one('click', function closeForm(e) {
+						if ($(e.target).hasClass('search_content_input')) {
 							$(document).one('click', closeForm);
 						}
-						else
-						{
+						else {
 							searchForm.removeClass('active');
 							searchActive = false;
 						}
 					});
 				}
-				else
-				{
+				else {
 					searchForm.removeClass('active');
 					searchActive = false;
 				}
-			});	
+			});
 		}
 	}
 });
